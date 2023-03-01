@@ -7,6 +7,8 @@ import {
   TicketInfoContainer,
 } from '../../../components/Payment/paymentComponents';
 import checkbox from '../../../assets/images/Vector.svg';
+import CreditCardComponent from '../../../components/Payment/CreditCardComponent';
+import 'react-credit-cards/es/styles-compiled.css';
 
 export default function Payment() {
   const ticket = { isRemote: true, containsHotel: false, price: 600.0 };
@@ -21,7 +23,7 @@ export default function Payment() {
         <h3>R$ {ticket.price}</h3>
       </TicketInfoContainer>
       <Subtitle>Pagamento</Subtitle>
-
+      <CreditCardComponent />
       {paid ? <PaymentConfirmed /> : ''}
     </>
   );
@@ -37,10 +39,9 @@ function PaymentConfirmed() {
       </div>
     </PaymentConfirmedContainer>
   );
-
 }
 
-const StyledTypography = styled(Typography)`
+/* const StyledTypography = styled(Typography)`
   margin-bottom: 20px!important;
 `;
 const StyledBox = styled.div`
@@ -80,3 +81,4 @@ font-weight: 400;
 font-size: 14px;
 color: #898989;
 `;
+ */
