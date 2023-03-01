@@ -1,39 +1,43 @@
-import styled from 'styled-components';
-import Typography from '@material-ui/core/Typography';
 
-import useEnrollment from '../../../hooks/api/useEnrollment';
+import { useState } from 'react';
+import { Title } from '../../../components/Auth';
+import {
+  PaymentConfirmedContainer,
+  Subtitle,
+  TicketInfoContainer,
+} from '../../../components/Payment/paymentComponents';
+import checkbox from '../../../assets/images/Vector.svg';
 
 export default function Payment() {
-  const { enrollment } = useEnrollment();
+  const ticket = { isRemote: true, containsHotel: false, price: 600.0 };
+  const [paid, setPaid] = useState(false);
 
-  return(
+  return (
     <>
-      <StyledTypography variant="h4">Ingresso e pagamento</StyledTypography>
-      {enrollment ? 
-        <>
-          <StyledText>
-            Primeiro, escolha sua modalidade de ingresso
-          </StyledText>
-          <Buttons>
-            <Button>
-              <Teste1>Presencial</Teste1>
-              <Teste2>R$ 250</Teste2>
-            </Button>
-            <Button>
-              <Teste1>Online</Teste1>
-              <Teste2>R$ 100</Teste2>
-            </Button>
-          </Buttons>
-        </>
-        :
-        <StyledBox>
-          <StyledText>
-            Você precisa completar sua inscrição antes de prosseguir pra escolha de ingresso
-          </StyledText>
-        </StyledBox>
-      }
+      <Title>Ingresso e pagamento</Title>
+      <Subtitle>Ingresso Escolhido</Subtitle>
+      <TicketInfoContainer>
+        <p>{ticket.isRemote ? 'Remoto' : ticket.containsHotel ? 'Presencial + Com Hotel' : 'Presencial + Sem Hotel'}</p>
+        <h3>R$ {ticket.price}</h3>
+      </TicketInfoContainer>
+      <Subtitle>Pagamento</Subtitle>
+
+      {paid ? <PaymentConfirmed /> : ''}
     </>
   );
+}
+
+function PaymentConfirmed() {
+  return (
+    <PaymentConfirmedContainer>
+      <img src={checkbox} alt="checked checkbox" />
+      <div>
+        <p>Pagamento Confirmado</p>
+        <p>Prossiga para escolha de hospedagem e atividades</p>
+      </div>
+    </PaymentConfirmedContainer>
+  );
+
 }
 
 const StyledTypography = styled(Typography)`
