@@ -1,15 +1,11 @@
 import React from 'react';
 import Card from 'react-credit-cards';
 
-import {
-  formatCreditCardNumber,
-  formatCVC,
-  formatExpirationDate,
-  formatFormData
-} from './utils';
+import { formatCreditCardNumber, formatCVC, formatExpirationDate, formatFormData } from './utils';
 
 import 'react-credit-cards/es/styles-compiled.css';
 import styled from 'styled-components';
+import axios from 'axios';
 
 export default class App extends React.Component {
   state = {
@@ -19,7 +15,7 @@ export default class App extends React.Component {
     cvc: '',
     issuer: '',
     focused: '',
-    formData: null
+    formData: null,
   };
 
   handleCallback = ({ issuer }, isValid) => {
@@ -30,7 +26,7 @@ export default class App extends React.Component {
 
   handleInputFocus = ({ target }) => {
     this.setState({
-      focused: target.name
+      focused: target.name,
     });
   };
 
@@ -46,11 +42,14 @@ export default class App extends React.Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3Nzc2MTExOH0.caD64_5szst91jOmqNwlEq5H4s-_8puNqm0ZGMPQQa8';
+
     e.preventDefault();
     const { issuer } = this.state;
     const formData = [...e.target.elements]
-      .filter(d => d.name)
+      .filter((d) => d.name)
       .reduce((acc, d) => {
         acc[d.name] = d.value;
         return acc;
@@ -58,6 +57,23 @@ export default class App extends React.Component {
 
     this.setState({ formData });
     this.form.reset();
+
+    const cardData = { ...formData };
+    const data = {
+      ticketId: 1,
+      cardData,
+    };
+
+    const promise = axios.post(`${process.env.REACT_APP_API_BASE_URL}/payments/process`, data, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    promise
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
     console.log(formData);
   };
 
@@ -75,7 +91,7 @@ export default class App extends React.Component {
             focused={focused}
             callback={this.handleCallback}
           />
-          <CardForm ref={c => (this.form = c)} onSubmit={this.handleSubmit}>
+          <CardForm ref={(c) => (this.form = c)} onSubmit={this.handleSubmit}>
             <div className="form-group">
               <input
                 type="tel"
@@ -83,12 +99,13 @@ export default class App extends React.Component {
                 className="form-control"
                 placeholder="Card Number"
                 pattern="[\d| ]{16,22}"
-                maxLength='19'
+                maxLength="19"
                 required
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
               />
-              <br/><NumberDescription>E.g.: 49..., 51..., 36..., 37...</NumberDescription>
+              <br />
+              <NumberDescription>E.g.: 49..., 51..., 36..., 37...</NumberDescription>
             </div>
             <div className="form-group">
               <input
@@ -132,7 +149,6 @@ export default class App extends React.Component {
               <button className="btn btn-primary btn-block">Realizar Pagamento</button>
             </div>
           </CardForm>
-          
         </CardContainer>
       </div>
     );
@@ -140,15 +156,14 @@ export default class App extends React.Component {
 }
 
 const CardContainer = styled.div`
-display: flex;
-position: absolute;
-margin-top: 21px;
-
+  display: flex;
+  position: absolute;
+  margin-top: 21px;
 `;
 const CardForm = styled.form`
-margin-left: 20px;
+  margin-left: 20px;
 `;
 const NumberDescription = styled.small`
-font-size: 15px;
-color: grey;
+  font-size: 15px;
+  color: grey;
 `;
