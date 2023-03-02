@@ -93,7 +93,7 @@ export default class App extends React.Component {
           />
           <CardForm ref={(c) => (this.form = c)} onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <input
+              <CardNumber
                 type="tel"
                 name="number"
                 className="form-control"
@@ -108,7 +108,7 @@ export default class App extends React.Component {
               <NumberDescription>E.g.: 49..., 51..., 36..., 37...</NumberDescription>
             </div>
             <div className="form-group">
-              <input
+              <CardNumber
                 type="text"
                 name="name"
                 className="form-control"
@@ -118,9 +118,9 @@ export default class App extends React.Component {
                 onFocus={this.handleInputFocus}
               />
             </div>
-            <div className="row">
+            <CvcContainer className="row">
               <div className="col-6">
-                <input
+                <ExpiryInput
                   type="tel"
                   name="expiry"
                   className="form-control"
@@ -132,7 +132,7 @@ export default class App extends React.Component {
                 />
               </div>
               <div className="col-6">
-                <input
+                <CvcInput
                   type="tel"
                   name="cvc"
                   className="form-control"
@@ -143,10 +143,10 @@ export default class App extends React.Component {
                   onFocus={this.handleInputFocus}
                 />
               </div>
-            </div>
+            </CvcContainer>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions">
-              <button className="btn btn-primary btn-block">Realizar Pagamento</button>
+              <PaymentButton className="btn btn-primary btn-block"><h1>REALIZAR PAGAMENTO</h1></PaymentButton>
             </div>
           </CardForm>
         </CardContainer>
@@ -154,7 +154,26 @@ export default class App extends React.Component {
     );
   }
 }
+const PaymentButton = styled.button`
+width: 182px;
+height: 37px;
+background: #E0E0E0;
+box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+border: none;
+outline: none;
+cursor: pointer;
+h1{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+text-align: center;
 
+color: #000000;
+}
+`;
 const CardContainer = styled.div`
   display: flex;
   position: absolute;
@@ -162,8 +181,33 @@ const CardContainer = styled.div`
 `;
 const CardForm = styled.form`
   margin-left: 20px;
+  
+`;
+const CardNumber = styled.input`
+width: 400px;
+height: 30px;
+border-radius: 5px;
+margin-top: 10px;
 `;
 const NumberDescription = styled.small`
   font-size: 15px;
   color: grey;
+  margin-bottom: 15px;
+`;
+const CvcContainer = styled.div`
+display:flex;
+margin-top: 15px;
+`;
+const ExpiryInput = styled.input`
+height: 30px;
+border-radius: 5px;
+width: 170px;
+margin-right: 10px;
+`;
+const CvcInput = styled.input`
+height: 30px;
+border-radius: 5px;
+width: 80px;
+border-color: grey;
+margin-bottom: 10px;
 `;
