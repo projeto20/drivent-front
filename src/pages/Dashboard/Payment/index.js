@@ -1,9 +1,10 @@
-import styled from 'styled-components';
-import Typography from '@material-ui/core/Typography';
 
 import useEnrollment from '../../../hooks/api/useEnrollment';
 import TicketProcess from '../../../components/Dashboard/Payment/ticket';
+import styled from 'styled-components';
 import { useState } from 'react';
+import { Typography } from '@material-ui/core';
+import PaymentWithCard from '../../../components/Payment/PaymentWithCard';
 
 export default function Payment() {
   const { enrollment } = useEnrollment();
@@ -13,7 +14,7 @@ export default function Payment() {
     <>
       <StyledTypography variant="h4">Ingresso e pagamento</StyledTypography>
       {enrollment ? (
-        isTicketConfirm ? null : (
+        isTicketConfirm ? <PaymentWithCard/> : (
           <TicketProcess setIsTicketConfirm={setIsTicketConfirm} />
         )
       ) : (
