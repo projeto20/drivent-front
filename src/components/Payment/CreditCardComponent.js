@@ -58,6 +58,7 @@ export default class App extends React.Component {
 
     this.setState({ formData });
     this.form.reset();
+    console.log(formData);
   };
 
   render() {
