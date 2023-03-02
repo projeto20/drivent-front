@@ -146,7 +146,7 @@ export default class App extends React.Component {
             </CvcContainer>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions">
-              <PaymentButton className="btn btn-primary btn-block">Realizar Pagamento</PaymentButton>
+              <PaymentButton className="btn btn-primary btn-block"><h1>REALIZAR PAGAMENTO</h1></PaymentButton>
             </div>
           </CardForm>
         </CardContainer>
@@ -163,6 +163,16 @@ border-radius: 4px;
 border: none;
 outline: none;
 cursor: pointer;
+h1{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+text-align: center;
+
+color: #000000;
+}
 `;
 const CardContainer = styled.div`
   display: flex;
