@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Title } from '../Auth';
-import { PaymentConfirmedContainer, Subtitle, TicketInfoContainer } from './PaymentStyledComponents';
 import checkbox from '../../assets/images/Vector.svg';
 import CreditCardComponent from './CreditCardComponent';
 import 'react-credit-cards/es/styles-compiled.css';
+import { PaymentConfirmedContainer, Subtitle, TicketInfoContainer } from './PaymentStyledComponents';
 
 export default function PaymentWithCard() {
   const ticket = { isRemote: true, containsHotel: false, price: 600.0 };
