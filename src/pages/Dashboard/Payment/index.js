@@ -13,7 +13,9 @@ export default function Payment() {
     <>
       <StyledTypography variant="h4">Ingresso e pagamento</StyledTypography>
       {enrollment ? (
-        isTicketConfirm? null : <TicketProcess />
+        isTicketConfirm ? null : (
+          <TicketProcess setIsTicketConfirm={setIsTicketConfirm} />
+        )
       ) : (
         <StyledBox>
           <StyledText>Você precisa completar sua inscrição antes de prosseguir pra escolha de ingresso</StyledText>

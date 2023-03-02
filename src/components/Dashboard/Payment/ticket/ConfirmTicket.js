@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-export default function ConfirmTicket(params) {
+export default function ConfirmTicket({ totalPrice, setIsTicketConfirm }) {
   return (
     <StyledContainer>
-      <StyledText>Fechado! O total ficou em R$ 600. Agora é só confirmar:</StyledText>
-      <ConfirmButton>
+      <StyledText>Fechado! O total ficou em R$ {totalPrice}. Agora é só confirmar:</StyledText>
+      <ConfirmButton onClick={() => setIsTicketConfirm(true)}>
         <Teste3>RESERVAR INGRESSO</Teste3>
       </ConfirmButton>
     </StyledContainer>

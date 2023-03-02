@@ -1,25 +1,53 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function HostingModalityChoice({ setIsHostingChosen, isHostingChosen }) {
+export default function HostingModalityChoice({ setIsHostingChosen, totalPrice, setTotalPrice }) {
   const teste11 = 'Sem Hotel';
   const teste12 = 0;
   const teste21 = 'Com Hotel';
   const teste22 = 350;
 
-  function chooseHosting() {
-    console.log('cliquei aqui tbm!!');
-    setIsHostingChosen(!isHostingChosen);
+  const [includesHotel, setIncludesHotel] = useState(undefined);
+
+  function chooseNoHotel() {
+    if (includesHotel === undefined) {
+      setIncludesHotel(false);
+      setIsHostingChosen(true);
+    } else if (includesHotel === false) {
+      setIncludesHotel(undefined);
+      setIsHostingChosen(false);
+    } else {
+      setIncludesHotel(false);
+      setIsHostingChosen(true);
+      setTotalPrice(totalPrice - teste22);
+    }
+  }
+
+  function chooseWithHotel() {
+    if (includesHotel === undefined) {
+      setIncludesHotel(true);
+      setTotalPrice(totalPrice + teste22);
+      setIsHostingChosen(true);
+    } else if (includesHotel === true) {
+      setIncludesHotel(undefined);
+      setIsHostingChosen(false);
+      setTotalPrice(totalPrice - teste22);
+    } else {
+      setIncludesHotel(true);
+      setIsHostingChosen(true);
+      setTotalPrice(totalPrice + teste22);
+    }
   }
 
   return (
     <StyledContainer>
       <StyledText>Ótimo! Agora escolha sua modalidade de hospedagem</StyledText>
       <Buttons>
-        <Button onClick={() => chooseHosting()}>
+        <Button background={includesHotel === false ? '#FFEED2' : '#E5E5E5'} onClick={() => chooseNoHotel()}>
           <Teste1>{teste11}</Teste1>
           <Teste2>R$ {teste12}</Teste2>
         </Button>
-        <Button onClick={() => chooseHosting()}>
+        <Button background={includesHotel ? '#FFEED2' : '#E5E5E5'} onClick={() => chooseWithHotel()}>
           <Teste1>{teste21}</Teste1>
           <Teste2>R$ {teste22}</Teste2>
         </Button>
@@ -55,6 +83,7 @@ const Button = styled.button`
   height: 145px;
   border: 1px solid #cecece;
   border-radius: 20px;
+  background: ${(props) => props.background};
 `;
 
 const Teste1 = styled.span`
