@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-import { Title } from '../Auth';
-import checkbox from '../../assets/images/Vector.svg';
+import { useState, useEffect } from 'react';
+import checkbox from '../../../../assets/images/Vector.svg';
 import CreditCardComponent from './CreditCardComponent';
 import 'react-credit-cards/es/styles-compiled.css';
-import { PaymentConfirmedContainer, Subtitle, TicketInfoContainer } from './PaymentStyledComponents';
+import { PaymentConfirmedContainer, Subtitle, TicketInfoContainer } from '../PaymentStyledComponents';
 import axios from 'axios';
 
 export default function PaymentWithCard() {
@@ -18,6 +17,7 @@ export default function PaymentWithCard() {
     promise
       .then((res) => {
         setTicket(res.data);
+        setPaid(res.data.status);
       })
       .catch((err) => {
         console.log(err.response);
@@ -26,7 +26,6 @@ export default function PaymentWithCard() {
 
   return (
     <>
-      <Title>Ingresso e pagamento</Title>
       <Subtitle>Ingresso Escolhido</Subtitle>
       <TicketInfoContainer>
         <p>{ticket.TicketType?.isRemote ? 'Remoto' : ticket.TicketType?.containsHotel ? 'Presencial + Com Hotel' : 'Presencial + Sem Hotel'}</p>

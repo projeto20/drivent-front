@@ -1,9 +1,9 @@
 import useEnrollment from '../../../hooks/api/useEnrollment';
-import TicketProcess from '../../../components/Dashboard/Payment/ticket';
+import TicketProcess from '../../../components/Dashboard/Payment/tickets';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { Typography } from '@material-ui/core';
-import PaymentWithCard from '../../../components/Payment/PaymentWithCard';
+import PaymentWithCard from '../../../components/Dashboard/Payment/Payment/PaymentWithCard';
 import axios from 'axios';
 
 export default function Payment() {
@@ -13,15 +13,26 @@ export default function Payment() {
   const [ticketTypes, setTicketTypes] = useState([]);
 
   useEffect(() => {
-    const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/tickets/types`, {
+    const ticketTypesRequisition = axios.get(`${process.env.REACT_APP_API_BASE_URL}/tickets/types`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    promise
+    ticketTypesRequisition
       .then((res) => {
         setTicketTypes(res.data);
       })
       .catch((err) => {
         console.log(err.response);
+      });
+
+    const ticketRequisition = axios.get(`${process.env.REACT_APP_API_BASE_URL}/tickets`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    ticketRequisition
+      .then((res) => {
+        setIsTicketConfirm(true);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, []);
 
@@ -44,7 +55,7 @@ export default function Payment() {
 }
 
 const StyledTypography = styled(Typography)`
-  margin-bottom: 20px !important;
+  margin-bottom: 37px !important;
 `;
 const StyledBox = styled.div`
   display: flex;

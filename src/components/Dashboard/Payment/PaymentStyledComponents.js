@@ -2,7 +2,17 @@ import styled from 'styled-components';
 export const Subtitle = styled.h2`
   font-size: 20px;
   color: #8e8e8e;
-  margin-top: 37px;
+`;
+
+export const TicketChoiceContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 44px;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  margin-top: 17px;
 `;
 
 export const TicketInfoContainer = styled.div`

@@ -1,15 +1,11 @@
 import styled from 'styled-components';
+import { Buttons, Subtitle, TicketChoiceContainer } from '../PaymentStyledComponents.js';
 
-export default function TicketModalityChoice({
-  setIsTicketChosen,
-  isTicketChosen,
-  setIsHostingChosen,
-  setTotalPrice,
-}) {
-  const teste11 = 'Presencial';
-  const teste12 = 250;
-  const teste21 = 'Online';
-  const teste22 = 100;
+export default function TicketModalityChoice({ setIsTicketChosen, isTicketChosen, setIsHostingChosen, setTotalPrice }) {
+  const faceToFaceOption = 'Presencial';
+  const faceToFacePrice = 250;
+  const onlineOption = 'Online';
+  const onlinePrice = 100;
 
   function chooseOnlineModality() {
     if (isTicketChosen === 'online') {
@@ -19,7 +15,7 @@ export default function TicketModalityChoice({
     } else {
       setIsTicketChosen('online');
       setIsHostingChosen(false);
-      setTotalPrice(teste22);
+      setTotalPrice(onlinePrice);
     }
   }
 
@@ -30,46 +26,29 @@ export default function TicketModalityChoice({
       setTotalPrice(0);
     } else {
       setIsTicketChosen('face-to-face');
-      setTotalPrice(teste12);
+      setTotalPrice(faceToFacePrice);
     }
   }
 
   return (
-    <StyledContainer>
-      <StyledText>Primeiro, escolha sua modalidade de ingresso</StyledText>
+    <TicketChoiceContainer>
+      <Subtitle>Primeiro, escolha sua modalidade de ingresso</Subtitle>
       <Buttons>
         <Button
           background={isTicketChosen === 'face-to-face' ? '#FFEED2' : '#E5E5E5'}
           onClick={() => chooseFaceToFaceModality()}
         >
-          <Teste1>{teste11}</Teste1>
-          <Teste2>R$ {teste12}</Teste2>
+          <p>{faceToFaceOption}</p>
+          <h3>R$ {faceToFacePrice}</h3>
         </Button>
         <Button background={isTicketChosen === 'online' ? '#FFEED2' : '#E5E5E5'} onClick={() => chooseOnlineModality()}>
-          <Teste1>{teste21}</Teste1>
-          <Teste2>R$ {teste22}</Teste2>
+          <p>{onlineOption}</p>
+          <h3>R$ {onlinePrice}</h3>
         </Button>
       </Buttons>
-    </StyledContainer>
+    </TicketChoiceContainer>
   );
 }
-
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 44px;
-`;
-
-const StyledText = styled.div`
-  font-weight: 400;
-  font-size: 20px;
-  color: #8e8e8e;
-`;
-
-const Buttons = styled.div`
-  display: flex;
-  margin-top: 17px;
-`;
 
 const Button = styled.button`
   display: flex;
@@ -82,15 +61,16 @@ const Button = styled.button`
   border: 1px solid #cecece;
   border-radius: 20px;
   background: ${(props) => props.background};
-`;
 
-const Teste1 = styled.span`
-  font-weight: 400;
-  font-size: 16px;
-  color: #454545;
-`;
-const Teste2 = styled.span`
-  font-weight: 400;
-  font-size: 14px;
-  color: #898989;
+  p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #454545;
+  }
+
+  h3 {
+    font-weight: 400;
+    font-size: 14px;
+    color: #898989;
+  }
 `;
