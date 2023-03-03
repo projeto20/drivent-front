@@ -1,10 +1,10 @@
 
 import useEnrollment from '../../../hooks/api/useEnrollment';
-import TicketProcess from '../../../components/Dashboard/Payment/ticket';
+import TicketProcess from '../../../components/Dashboard/Payment/tickets';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { Typography } from '@material-ui/core';
-import PaymentWithCard from '../../../components/Payment/PaymentWithCard';
+import PaymentWithCard from '../../../components/Dashboard/Payment/Payment/PaymentWithCard.js';
 
 export default function Payment() {
   const { enrollment } = useEnrollment();
@@ -27,7 +27,7 @@ export default function Payment() {
 }
 
 const StyledTypography = styled(Typography)`
-  margin-bottom: 20px !important;
+  margin-bottom: 37px !important;
 `;
 const StyledBox = styled.div`
   display: flex;

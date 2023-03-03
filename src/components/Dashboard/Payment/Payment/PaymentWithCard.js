@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { Title } from '../Auth';
-import checkbox from '../../assets/images/Vector.svg';
+import checkbox from '../../../../assets/images/Vector.svg';
 import CreditCardComponent from './CreditCardComponent';
 import 'react-credit-cards/es/styles-compiled.css';
-import { PaymentConfirmedContainer, Subtitle, TicketInfoContainer } from './PaymentStyledComponents';
+import { PaymentConfirmedContainer, Subtitle, TicketInfoContainer } from '../PaymentStyledComponents';
 
 export default function PaymentWithCard() {
   const ticket = { isRemote: true, containsHotel: false, price: 600.0 };
@@ -11,7 +10,6 @@ export default function PaymentWithCard() {
 
   return (
     <>
-      <Title>Ingresso e pagamento</Title>
       <Subtitle>Ingresso Escolhido</Subtitle>
       <TicketInfoContainer>
         <p>{ticket.isRemote ? 'Remoto' : ticket.containsHotel ? 'Presencial + Com Hotel' : 'Presencial + Sem Hotel'}</p>
