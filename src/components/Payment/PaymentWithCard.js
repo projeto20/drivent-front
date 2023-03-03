@@ -17,7 +17,6 @@ export default function PaymentWithCard() {
     });
     promise
       .then((res) => {
-        console.log(res.data);
         setTicket(res.data);
       })
       .catch((err) => {
@@ -30,8 +29,8 @@ export default function PaymentWithCard() {
       <Title>Ingresso e pagamento</Title>
       <Subtitle>Ingresso Escolhido</Subtitle>
       <TicketInfoContainer>
-        <p>{ticket.TicketType.isRemote ? 'Remoto' : ticket.TicketType.containsHotel ? 'Presencial + Com Hotel' : 'Presencial + Sem Hotel'}</p>
-        <h3>R$ {ticket.TicketType.price}</h3>
+        <p>{ticket.TicketType?.isRemote ? 'Remoto' : ticket.TicketType?.containsHotel ? 'Presencial + Com Hotel' : 'Presencial + Sem Hotel'}</p>
+        <h3>R$ {ticket.TicketType?.price}</h3>
       </TicketInfoContainer>
       <Subtitle>Pagamento</Subtitle>
       <CreditCardComponent setPaid={setPaid} />
