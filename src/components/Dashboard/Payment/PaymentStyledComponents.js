@@ -10,6 +10,11 @@ export const TicketChoiceContainer = styled.div`
   margin-bottom: 44px;
 `;
 
+export const Buttons = styled.div`
+  display: flex;
+  margin-top: 17px;
+`;
+
 export const TicketInfoContainer = styled.div`
   width: 290px;
   height: 108px;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Subtitle, TicketChoiceContainer } from '../PaymentStyledComponents.js';
+import { Buttons, Subtitle, TicketChoiceContainer } from '../PaymentStyledComponents.js';
 
 export default function TicketModalityChoice({ setIsTicketChosen, isTicketChosen, setIsHostingChosen, setTotalPrice }) {
   const faceToFaceOption = 'Presencial';
@@ -49,11 +49,6 @@ export default function TicketModalityChoice({ setIsTicketChosen, isTicketChosen
     </TicketChoiceContainer>
   );
 }
-
-const Buttons = styled.div`
-  display: flex;
-  margin-top: 17px;
-`;
 
 const Button = styled.button`
   display: flex;

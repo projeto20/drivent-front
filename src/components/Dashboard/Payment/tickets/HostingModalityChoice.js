@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { Subtitle, TicketChoiceContainer } from '../PaymentStyledComponents.js';
+import { Buttons, Subtitle, TicketChoiceContainer } from '../PaymentStyledComponents.js';
 
 export default function HostingModalityChoice({ setIsHostingChosen, totalPrice, setTotalPrice }) {
   const optionWithNoHotel = 'Sem Hotel';
@@ -8,7 +8,7 @@ export default function HostingModalityChoice({ setIsHostingChosen, totalPrice, 
   const optionWithHotel = 'Com Hotel';
   const priceWithHotel = 350;
 
-  const [includesHotel, setIncludesHotel] = useState(undefined);
+  const [includesHotel, setIncludesHotel] = useState(undefined); //true, false, undefined
 
   function chooseNoHotel() {
     if (includesHotel === undefined) {
@@ -52,11 +52,6 @@ export default function HostingModalityChoice({ setIsHostingChosen, totalPrice, 
     </TicketChoiceContainer>
   );
 }
-
-const Buttons = styled.div`
-  display: flex;
-  margin-top: 17px;
-`;
 
 const Button = styled.button`
   display: flex;

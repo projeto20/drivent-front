@@ -17,6 +17,7 @@ export default function PaymentWithCard() {
     promise
       .then((res) => {
         setTicket(res.data);
+        setPaid(res.data.status);
       })
       .catch((err) => {
         console.log(err.response);

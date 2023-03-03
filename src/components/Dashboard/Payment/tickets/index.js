@@ -4,7 +4,7 @@ import HostingModalityChoice from './HostingModalityChoice';
 import TicketModalityChoice from './TicketModalityChoice';
 
 export default function TicketProcess({ ticketTypes, setIsTicketConfirm }) {
-  const [isTicketChosen, setIsTicketChosen] = useState(false);
+  const [isTicketChosen, setIsTicketChosen] = useState(false); // online, face-to-face and false
   const [isHostingChosen, setIsHostingChosen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
