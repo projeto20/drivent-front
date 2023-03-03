@@ -3,7 +3,7 @@ import ConfirmTicket from './ConfirmTicket';
 import HostingModalityChoice from './HostingModalityChoice';
 import TicketModalityChoice from './TicketModalityChoice';
 
-export default function TicketProcess({ setIsTicketConfirm }) {
+export default function TicketProcess({ ticketTypes, setIsTicketConfirm }) {
   const [isTicketChosen, setIsTicketChosen] = useState(false);
   const [isHostingChosen, setIsHostingChosen] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -24,7 +24,7 @@ export default function TicketProcess({ setIsTicketConfirm }) {
         />
       ) : null}
       {isHostingChosen || isTicketChosen === 'online' ? (
-        <ConfirmTicket totalPrice={totalPrice} setIsTicketConfirm={setIsTicketConfirm} />
+        <ConfirmTicket ticketTypes={ticketTypes} totalPrice={totalPrice} setIsTicketConfirm={setIsTicketConfirm} />
       ) : null}
     </>
   );
