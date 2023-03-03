@@ -4,7 +4,7 @@ import { Subtitle } from '../PaymentStyledComponents';
 
 export default function ConfirmTicket({ ticketTypes, totalPrice, setIsTicketConfirm }) {
   return (
-    <StyledContainer>
+    <>
       <Subtitle>Fechado! O total ficou em R$ {totalPrice}. Agora é só confirmar:</Subtitle>
       <ConfirmButton
         onClick={() => {
@@ -25,23 +25,11 @@ export default function ConfirmTicket({ ticketTypes, totalPrice, setIsTicketConf
             });
         }}
       >
-        <Teste3>RESERVAR INGRESSO</Teste3>
+        <p>RESERVAR INGRESSO</p>
       </ConfirmButton>
-    </StyledContainer>
+    </>
   );
 }
-
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 44px;
-`;
-
-const Teste3 = styled.span`
-  font-weight: 400;
-  font-size: 14px;
-  color: #000000;
-`;
 
 const ConfirmButton = styled.button`
   width: 162px;
@@ -52,4 +40,10 @@ const ConfirmButton = styled.button`
   background: #e0e0e0;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    color: #000000;
+  }
 `;
