@@ -43,8 +43,7 @@ export default class App extends React.Component {
   };
 
   handleSubmit = (e) => {
-    const token =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3Nzc2MTExOH0.caD64_5szst91jOmqNwlEq5H4s-_8puNqm0ZGMPQQa8';
+    const token = JSON.parse(localStorage.getItem('userData')).token;
 
     e.preventDefault();
     const { issuer } = this.state;
@@ -146,7 +145,9 @@ export default class App extends React.Component {
             </CvcContainer>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions">
-              <PaymentButton className="btn btn-primary btn-block"><h1>REALIZAR PAGAMENTO</h1></PaymentButton>
+              <PaymentButton className="btn btn-primary btn-block">
+                <h1>REALIZAR PAGAMENTO</h1>
+              </PaymentButton>
             </div>
           </CardForm>
         </CardContainer>
@@ -155,24 +156,24 @@ export default class App extends React.Component {
   }
 }
 const PaymentButton = styled.button`
-width: 182px;
-height: 37px;
-background: #E0E0E0;
-box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
-border-radius: 4px;
-border: none;
-outline: none;
-cursor: pointer;
-h1{
-  font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 14px;
-line-height: 16px;
-text-align: center;
+  width: 182px;
+  height: 37px;
+  background: #e0e0e0;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  h1 {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
 
-color: #000000;
-}
+    color: #000000;
+  }
 `;
 const CardContainer = styled.div`
   display: flex;
@@ -181,13 +182,12 @@ const CardContainer = styled.div`
 `;
 const CardForm = styled.form`
   margin-left: 20px;
-  
 `;
 const CardNumber = styled.input`
-width: 400px;
-height: 30px;
-border-radius: 5px;
-margin-top: 10px;
+  width: 400px;
+  height: 30px;
+  border-radius: 5px;
+  margin-top: 10px;
 `;
 const NumberDescription = styled.small`
   font-size: 15px;
@@ -195,19 +195,19 @@ const NumberDescription = styled.small`
   margin-bottom: 15px;
 `;
 const CvcContainer = styled.div`
-display:flex;
-margin-top: 15px;
+  display: flex;
+  margin-top: 15px;
 `;
 const ExpiryInput = styled.input`
-height: 30px;
-border-radius: 5px;
-width: 170px;
-margin-right: 10px;
+  height: 30px;
+  border-radius: 5px;
+  width: 170px;
+  margin-right: 10px;
 `;
 const CvcInput = styled.input`
-height: 30px;
-border-radius: 5px;
-width: 80px;
-border-color: grey;
-margin-bottom: 10px;
+  height: 30px;
+  border-radius: 5px;
+  width: 80px;
+  border-color: grey;
+  margin-bottom: 10px;
 `;

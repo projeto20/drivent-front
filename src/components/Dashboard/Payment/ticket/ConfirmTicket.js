@@ -1,10 +1,29 @@
+import axios from 'axios';
 import styled from 'styled-components';
 
-export default function ConfirmTicket({ totalPrice, setIsTicketConfirm }) {
+export default function ConfirmTicket({ ticketTypes, totalPrice, setIsTicketConfirm }) {
   return (
     <StyledContainer>
       <StyledText>Fechado! O total ficou em R$ {totalPrice}. Agora é só confirmar:</StyledText>
-      <ConfirmButton onClick={() => setIsTicketConfirm(true)}>
+      <ConfirmButton
+        onClick={() => {
+          const ticketType = ticketTypes.filter((e) => e.price === totalPrice);
+          const data = { ticketTypeId: ticketType[0].id };
+          const token = JSON.parse(localStorage.getItem('userData')).token;
+
+          const promise = axios.post(`${process.env.REACT_APP_API_BASE_URL}/tickets`, data, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          promise
+            .then((res) => {
+              console.log(res);
+              setIsTicketConfirm(true);
+            })
+            .catch((err) => {
+              console.log(err.response);
+            });
+        }}
+      >
         <Teste3>RESERVAR INGRESSO</Teste3>
       </ConfirmButton>
     </StyledContainer>

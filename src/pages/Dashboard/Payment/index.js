@@ -1,21 +1,38 @@
-
 import useEnrollment from '../../../hooks/api/useEnrollment';
 import TicketProcess from '../../../components/Dashboard/Payment/ticket';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Typography } from '@material-ui/core';
 import PaymentWithCard from '../../../components/Payment/PaymentWithCard';
+import axios from 'axios';
 
 export default function Payment() {
   const { enrollment } = useEnrollment();
   const [isTicketConfirm, setIsTicketConfirm] = useState(false);
+  const token = JSON.parse(localStorage.getItem('userData')).token;
+  const [ticketTypes, setTicketTypes] = useState([]);
+
+  useEffect(() => {
+    const promise = axios.get(`${process.env.REACT_APP_API_BASE_URL}/tickets/types`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    promise
+      .then((res) => {
+        setTicketTypes(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  }, []);
 
   return (
     <>
       <StyledTypography variant="h4">Ingresso e pagamento</StyledTypography>
       {enrollment ? (
-        isTicketConfirm ? <PaymentWithCard/> : (
-          <TicketProcess setIsTicketConfirm={setIsTicketConfirm} />
+        isTicketConfirm ? (
+          <PaymentWithCard />
+        ) : (
+          <TicketProcess ticketTypes={ticketTypes} setIsTicketConfirm={setIsTicketConfirm} />
         )
       ) : (
         <StyledBox>
