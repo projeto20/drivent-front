@@ -31,8 +31,7 @@ export default function PaymentWithCard() {
         <h3>R$ {ticket.TicketType?.price}</h3>
       </TicketInfoContainer>
       <Subtitle>Pagamento</Subtitle>
-      <CreditCardComponent setPaid={setPaid} />
-      {paid ? <PaymentConfirmed /> : ''}
+      {paid ? <PaymentConfirmed /> : <CreditCardComponent ticketId={ticket.id} setPaid={setPaid} />}
     </>
   );
 }

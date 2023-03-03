@@ -59,7 +59,7 @@ export default class App extends React.Component {
 
     const cardData = { ...formData };
     const data = {
-      ticketId: 1,
+      ticketId: this.props.ticketId,
       cardData,
     };
 
@@ -69,6 +69,7 @@ export default class App extends React.Component {
     promise
       .then((res) => {
         console.log(res);
+        this.props.setPaid(true);
       })
       .catch((err) => {
         console.log(err.response);
