@@ -28,7 +28,7 @@ export default function PaymentWithCard() {
     <>
       <Subtitle>Ingresso Escolhido</Subtitle>
       <TicketInfoContainer>
-        <p>{ticket.TicketType?.isRemote ? 'Remoto' : ticket.TicketType?.containsHotel ? 'Presencial + Com Hotel' : 'Presencial + Sem Hotel'}</p>
+        <p>{ticket.TicketType?.isRemote ? 'Remoto' : ticket.TicketType?.includesHotel ? 'Presencial + Com Hotel' : 'Presencial + Sem Hotel'}</p>
         <h3>R$ {ticket.TicketType?.price}</h3>
       </TicketInfoContainer>
       <Subtitle>Pagamento</Subtitle>
