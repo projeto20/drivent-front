@@ -17,12 +17,13 @@ export default function PaymentWithCard() {
     promise
       .then((res) => {
         setTicket(res.data);
+        console.log(res.data);
         setPaid(res.data.status);
       })
       .catch((err) => {
         console.log(err.response);
       });
-  }, []);
+  }, [paid]);
 
   return (
     <>
@@ -32,7 +33,7 @@ export default function PaymentWithCard() {
         <h3>R$ {ticket.TicketType?.price}</h3>
       </TicketInfoContainer>
       <Subtitle>Pagamento</Subtitle>
-      {paid ? <PaymentConfirmed /> : <CreditCardComponent ticketId={ticket.id} setPaid={setPaid} />}
+      {paid === 'PAID' ? <PaymentConfirmed /> : <CreditCardComponent ticketId={ticket.id} setPaid={setPaid} />}
     </>
   );
 }
