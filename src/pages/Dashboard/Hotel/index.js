@@ -10,6 +10,7 @@ export default function Hotel() {
   const token = JSON.parse(localStorage.getItem('userData')).token;
   const isRemote = 0;
   const includesHotel = 1;
+  const [selectedhotel, setSelectedHotel] = useState(null);
   const [hotelSelected, setHotelSelected] = useState(false);
 
   return (
@@ -17,7 +18,12 @@ export default function Hotel() {
       <StyledTypography variant="h4">Escolha de hotel e quarto</StyledTypography>
       {enrollment ? (
         !isRemote && includesHotel ? (
-          <HotelChoice hotelSelected={hotelSelected} setHotelSelected={setHotelSelected}/>
+          <HotelChoice
+            selectedhotel={selectedhotel}
+            setSelectedHotel={setSelectedHotel}
+            hotelSelected={hotelSelected}
+            setHotelSelected={setHotelSelected}
+          />
         ) : (
           <StyledBox>
             <StyledText>Sua modalidade de ingresso não inclui hospedagem</StyledText>

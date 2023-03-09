@@ -1,25 +1,33 @@
 import styled from 'styled-components';
+import useHotelsInfos from '../../../hooks/api/useHotelsInfo';
+import useBooking from '../../../hooks/api/useBooking';
 
-export default function HotelCard({ id, setHotelSelected }) {
+export default function HotelCard({ hotel, selectedhotel, setSelectedHotel, setHotelSelected  }) {
+  const { hotelInfo } = useHotelsInfos(hotel.id);
+  const { booking, bookingError } = useBooking();
+
   function chooseHotel(num) {
+    setSelectedHotel(hotelInfo);
+    console.log(hotelInfo);
     console.log(`fui clicado no ${num}`);
     setHotelSelected(true);
   }
+
   return (
-    <Card onClick={() => chooseHotel(id)}>
+    <Card onClick={() => chooseHotel(hotel?.id)}>
       <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Ve-__cISrPmd6zYoBnoCOFdXn4INGxdpgGy_QUuoHGC8DwsmJJncFSkKNMcJYP3vZvM&usqp=CAU"
+        src={hotel?.image}
         alt="foto-hotel"
       />
-      <Title>Driven Hotel</Title>
+      <Title>{hotel?.name}</Title>
       <Info>
         <div>
           <h6>Tipo de acomodação:</h6>
-          <p>Single e Double</p>
+          <p>Single, Double and Triple</p>
         </div>
         <div>
           <h6>Vagas disponiveis</h6>
-          <p>124</p>
+          <p>{hotelInfo?.Rooms?.length}</p>
         </div>
       </Info>
     </Card>
@@ -33,6 +41,7 @@ const Card = styled.div`
   background: #ebebeb;
   border-radius: 10px;
   padding: 14px;
+  margin-right: 20px;
 
   img {
     width: 168px;
