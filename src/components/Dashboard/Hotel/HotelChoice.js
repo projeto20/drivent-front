@@ -1,17 +1,25 @@
 import styled from 'styled-components';
 import HotelCard from './HotelCard';
 import useHotels from '../../../hooks/api/useHotels';
+import RoomChoice from './RoomChoice';
 
-export default function HotelChoice({ selectedhotel, setSelectedHotel }) {
+export default function HotelChoice({ selectedhotel, setSelectedHotel, hotelSelected, setHotelSelected }) {
   const { hotel } = useHotels();
 
   return (
     <>
       <StyledContainer>
         {hotel?.map(hotels => {
-          return (<HotelCard hotel={hotels} selectedhotel={selectedhotel} setSelectedHotel={setSelectedHotel} key={hotels.id}/>);
+          return (<HotelCard
+            hotel={hotels}
+            selectedhotel={selectedhotel}
+            setSelectedHotel={setSelectedHotel}
+            setHotelSelected={setHotelSelected}
+            key={hotels.id}
+          />);
         })}
       </StyledContainer>
+      {hotelSelected && <RoomChoice />}
     </>
   );
 }
