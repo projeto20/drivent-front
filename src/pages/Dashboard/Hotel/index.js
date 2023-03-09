@@ -1,19 +1,39 @@
 import styled from 'styled-components';
-import useEnrollment from '../../../hooks/api/useEnrollment';
 import { Typography } from '@material-ui/core';
 import HotelChoice from '../../../components/Dashboard/Hotel/HotelChoice';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { useState } from 'react';
 
 export default function Hotel() {
-  const { enrollment } = useEnrollment();
   const token = JSON.parse(localStorage.getItem('userData')).token;
-  const isRemote = 0;
-  const includesHotel = 1;
+  const [isPaid, setIsPaid] = useState(false);
+  const [showHotels, setShowHotels] = useState(false);
+
+  useEffect(() => {
+    const ticketRequisition = axios.get(`${process.env.REACT_APP_API_BASE_URL}/tickets`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    ticketRequisition
+      .then((res) => {
+        if (res.data.status === 'PAID') {
+          setIsPaid(true);
+        }
+
+        if (!res.data.TicketType.isRemote && res.data.TicketType.includesHotel) {
+          setShowHotels(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
       <StyledTypography variant="h4">Escolha de hotel e quarto</StyledTypography>
-      {enrollment ? (
-        !isRemote && includesHotel ? (
+      {isPaid ? (
+        showHotels ? (
           <HotelChoice />
         ) : (
           <StyledBox>
