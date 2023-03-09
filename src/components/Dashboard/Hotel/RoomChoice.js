@@ -67,5 +67,8 @@ const RoomContainer = styled.div`
     }
     div {
         margin-right: 16px;
+        img {
+            margin: 0px 3px;
+        }
     }
 `;
