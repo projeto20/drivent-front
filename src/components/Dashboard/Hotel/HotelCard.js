@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import useHotelsInfos from '../../../hooks/api/useHotelsInfo';
+import useBooking from '../../../hooks/api/useBooking';
 
-export default function HotelCard({ hotel }) {
+export default function HotelCard({ hotel, selectedhotel, setSelectedHotel }) {
   const { hotelInfo } = useHotelsInfos(hotel.id);
+  const { booking, bookingError } = useBooking();
 
   function chooseHotel(num) {
+    setSelectedHotel(hotelInfo);
+    console.log(hotelInfo);
     console.log(`fui clicado no ${num}`);
   }
 
