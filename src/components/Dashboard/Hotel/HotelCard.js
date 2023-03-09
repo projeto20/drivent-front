@@ -1,16 +1,29 @@
+import { useEffect, useState  } from 'react';
 import styled from 'styled-components';
+import { getHotel } from '../../../services/hotelApi';
+import useToken from '../../../hooks/useToken';
 
-export default function HotelCard({ id }) {
+export default function HotelCard({ hotel }) {
+  const token = useToken();
+  const [infoHotels, setInfoHotels] = useState([]);
+
+  useEffect(() => {
+    getHotel(hotel.id, token).then((hotels) => {
+      setInfoHotels(hotels);
+    });
+  }, []);
+
   function chooseHotel(num) {
     console.log(`fui clicado no ${num}`);
   }
+
   return (
-    <Card onClick={() => chooseHotel(id)}>
+    <Card onClick={() => chooseHotel(hotel?.id)}>
       <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Ve-__cISrPmd6zYoBnoCOFdXn4INGxdpgGy_QUuoHGC8DwsmJJncFSkKNMcJYP3vZvM&usqp=CAU"
+        src={hotel?.image}
         alt="foto-hotel"
       />
-      <Title>Driven Hotel</Title>
+      <Title>{hotel?.name}</Title>
       <Info>
         <div>
           <h6>Tipo de acomodação:</h6>
@@ -18,7 +31,7 @@ export default function HotelCard({ id }) {
         </div>
         <div>
           <h6>Vagas disponiveis</h6>
-          <p>124</p>
+          <p>{infoHotels?.Rooms?.length}</p>
         </div>
       </Info>
     </Card>
@@ -32,6 +45,7 @@ const Card = styled.div`
   background: #ebebeb;
   border-radius: 10px;
   padding: 14px;
+  margin-right: 20px;
 
   img {
     width: 168px;
