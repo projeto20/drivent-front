@@ -1,7 +1,9 @@
 import { id } from 'date-fns/locale';
 import { useState } from 'react';
 import styled from 'styled-components';
-import person from '../../../../src/assets/images/person.png';
+import person from '../../../../src/assets/images/person.svg';
+import selectedperson from '../../../../src/assets/images/selectedPerson.svg';
+import unavailable from '../../../../src/assets/images/unavailablePerson.svg';
 
 export default function RoomChoice() {
   const [selected, setSelected] = useState(null);
@@ -45,19 +47,17 @@ function Room({ id, capacity, isSelected, handleClick }) {
     <RoomContainer onClick={() => handleClick(id)} isSelected={isSelected}>
       <p>{id}</p>
       {capacity === 1 ? (
-        <div>
-          <img src={person} />
-        </div>
+        <div>{isSelected ? <img src={selectedperson} /> : <img src={person} />}</div>
       ) : capacity === 2 ? (
         <div>
           <img src={person} />
-          <img src={person} />
+          {isSelected ? <img src={selectedperson} /> : <img src={person} />}
         </div>
       ) : (
         <div>
           <img src={person} />
           <img src={person} />
-          <img src={person} />
+          {isSelected ? <img src={selectedperson} /> : <img src={person} />}
         </div>
       )}
     </RoomContainer>
@@ -93,6 +93,7 @@ const RoomContainer = styled.div`
     margin-right: 16px;
     img {
       margin: 0px 3px;
+      fill: blue;
     }
   }
 `;
