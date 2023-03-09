@@ -8,9 +8,14 @@ import unavailable from '../../../../src/assets/images/unavailablePerson.svg';
 export default function RoomChoice() {
   const [selected, setSelected] = useState(null);
 
-  function handleClick(id) {
+  function handleRoomClick(id) {
     setSelected(id);
   }
+
+  function handleButtonClick() {
+    console.log('Voce reservou o quarto: ', selected);
+  }
+
   const rooms = [
     { id: 100, capacity: 2 },
     { id: 101, capacity: 1 },
@@ -35,16 +40,23 @@ export default function RoomChoice() {
       <Title>Ótima pedida! Agora escolha seu quarto:</Title>
       <RoomsContainer>
         {rooms.map((e, idx) => (
-          <Room key={idx} id={e.id} handleClick={handleClick} isSelected={e.id === selected} capacity={e.capacity} />
+          <Room
+            key={idx}
+            id={e.id}
+            handleRoomClick={handleRoomClick}
+            isSelected={e.id === selected}
+            capacity={e.capacity}
+          />
         ))}
       </RoomsContainer>
+      {selected ? <ReserveRoomButton onClick={handleButtonClick}>RESERVAR QUARTO</ReserveRoomButton> : ''}
     </>
   );
 }
 
-function Room({ id, capacity, isSelected, handleClick }) {
+function Room({ id, capacity, isSelected, handleRoomClick }) {
   return (
-    <RoomContainer onClick={() => handleClick(id)} isSelected={isSelected}>
+    <RoomContainer onClick={() => handleRoomClick(id)} isSelected={isSelected}>
       <p>{id}</p>
       {capacity === 1 ? (
         <div>{isSelected ? <img src={selectedperson} /> : <img src={person} />}</div>
@@ -64,6 +76,22 @@ function Room({ id, capacity, isSelected, handleClick }) {
   );
 }
 
+const ReserveRoomButton = styled.div`
+  margin-top: 46px;
+  width: 182px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-self: flex-start;
+  justify-content: center;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
+  color: black;
+  font-size: 14px;
+  background-color: #e0e0e0;
+  :hover {
+    cursor: pointer;
+  }
+`;
 const Title = styled.p`
   font-size: 20px;
   color: #8e8e8e;
@@ -72,7 +100,7 @@ const Title = styled.p`
 const RoomsContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
 `;
 
