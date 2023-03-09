@@ -9,6 +9,7 @@ export default function Hotel() {
   const token = JSON.parse(localStorage.getItem('userData')).token;
   const [isPaid, setIsPaid] = useState(false);
   const [showHotels, setShowHotels] = useState(false);
+  const [hotelSelected, setHotelSelected] = useState(false);
 
   useEffect(() => {
     const ticketRequisition = axios.get(`${process.env.REACT_APP_API_BASE_URL}/tickets`, {
@@ -34,7 +35,7 @@ export default function Hotel() {
       <StyledTypography variant="h4">Escolha de hotel e quarto</StyledTypography>
       {isPaid ? (
         showHotels ? (
-          <HotelChoice />
+          <HotelChoice hotelSelected={hotelSelected} setHotelSelected={setHotelSelected}/>
         ) : (
           <StyledBox>
             <StyledText>Sua modalidade de ingresso não inclui hospedagem</StyledText>

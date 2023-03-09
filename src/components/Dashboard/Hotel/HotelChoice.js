@@ -1,14 +1,16 @@
 import styled from 'styled-components';
 import HotelCard from './HotelCard';
+import RoomChoice from './RoomChoice';
 
-export default function HotelChoice() {
+export default function HotelChoice({ hotelSelected, setHotelSelected }) {
   return (
     <>
       <StyledContainer>
-        <HotelCard id={1}/>
-        <HotelCard id={2}/>
-        <HotelCard id={3}/>
+        <HotelCard setHotelSelected={setHotelSelected} id={1} />
+        <HotelCard setHotelSelected={setHotelSelected} id={2} />
+        <HotelCard setHotelSelected={setHotelSelected} id={3} />
       </StyledContainer>
+      {hotelSelected && <RoomChoice />}
     </>
   );
 }
