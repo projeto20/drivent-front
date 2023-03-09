@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-export default function HotelCard({ id }) {
+export default function HotelCard({ id, setHotelSelected }) {
   function chooseHotel(num) {
     console.log(`fui clicado no ${num}`);
+    setHotelSelected(true);
   }
   return (
     <Card onClick={() => chooseHotel(id)}>
