@@ -1,17 +1,8 @@
-import { useEffect, useState  } from 'react';
 import styled from 'styled-components';
-import { getHotel } from '../../../services/hotelApi';
-import useToken from '../../../hooks/useToken';
+import useHotelsInfos from '../../../hooks/api/useHotelsInfo';
 
 export default function HotelCard({ hotel }) {
-  const token = useToken();
-  const [infoHotels, setInfoHotels] = useState([]);
-
-  useEffect(() => {
-    getHotel(hotel.id, token).then((hotels) => {
-      setInfoHotels(hotels);
-    });
-  }, []);
+  const { hotelInfo } = useHotelsInfos(hotel.id);
 
   function chooseHotel(num) {
     console.log(`fui clicado no ${num}`);
@@ -27,11 +18,11 @@ export default function HotelCard({ hotel }) {
       <Info>
         <div>
           <h6>Tipo de acomodação:</h6>
-          <p>Single e Double</p>
+          <p>Single, Double and Triple</p>
         </div>
         <div>
           <h6>Vagas disponiveis</h6>
-          <p>{infoHotels?.Rooms?.length}</p>
+          <p>{hotelInfo?.Rooms?.length}</p>
         </div>
       </Info>
     </Card>

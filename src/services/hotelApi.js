@@ -10,7 +10,7 @@ export async function getHotels(token) {
   return response.data;
 };
 
-export async function getHotel(id, token) {
+export async function getHotelInfos(id, token) {
   const response = await api.get(`/hotels/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -19,13 +19,3 @@ export async function getHotel(id, token) {
   
   return response.data;
 };
-
-/* export async function UpdateAccommodation(body, token) {
-  const response = await api.post('/enrollments', body, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  
-  return response.data;
-}; */

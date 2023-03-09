@@ -1,23 +1,14 @@
 import styled from 'styled-components';
 import HotelCard from './HotelCard';
-import { useEffect, useState } from 'react';
-import { getHotels } from '../../../services/hotelApi';
-import useToken from '../../../hooks/useToken';
+import useHotels from '../../../hooks/api/useHotels';
 
 export default function HotelChoice() {
-  const token = useToken();
-  const [hotels, setHotels] = useState([]);
-
-  useEffect(() => {
-    getHotels(token).then((hotels) => {
-      setHotels(hotels);
-    });
-  }, []);
+  const { hotel } = useHotels();
 
   return (
     <>
       <StyledContainer>
-        {hotels.map(hotels => {
+        {hotel?.map(hotels => {
           return (<HotelCard hotel={hotels} key={hotels.id}/>);
         })}
       </StyledContainer>
