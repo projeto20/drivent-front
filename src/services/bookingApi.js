@@ -8,17 +8,35 @@ export async function getBookings(token) {
   });
 
   return response.data;
-};
+}
 
 export async function postBooking(room, token) {
-  const response = await api.get('/booking', room, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  
+  const response = await api.get(
+    '/booking',
+    { roomId: room },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
   return response.data;
-};
+}
+
+export async function postBookingv2(room, token) {
+  const response = await api.post(
+    '/booking',
+    { roomId: room },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return response.data;
+}
 
 export async function putBooking(bookingId, room, token) {
   const response = await api.get(`/booking/${bookingId}`, room, {
@@ -26,6 +44,6 @@ export async function putBooking(bookingId, room, token) {
       Authorization: `Bearer ${token}`,
     },
   });
-    
+
   return response.data;
-};
+}

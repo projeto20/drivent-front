@@ -2,28 +2,19 @@ import styled from 'styled-components';
 import useEnrollment from '../../../hooks/api/useEnrollment';
 import { Typography } from '@material-ui/core';
 import HotelChoice from '../../../components/Dashboard/Hotel/HotelChoice';
-import RoomChoice from '../../../components/Dashboard/Hotel/RoomChoice';
 import { useState } from 'react';
 
 export default function Hotel() {
   const { enrollment } = useEnrollment();
-  const token = JSON.parse(localStorage.getItem('userData')).token;
   const isRemote = 0;
   const includesHotel = 1;
-  const [selectedhotel, setSelectedHotel] = useState(null);
-  const [hotelSelected, setHotelSelected] = useState(false);
 
   return (
     <>
       <StyledTypography variant="h4">Escolha de hotel e quarto</StyledTypography>
       {enrollment ? (
         !isRemote && includesHotel ? (
-          <HotelChoice
-            selectedhotel={selectedhotel}
-            setSelectedHotel={setSelectedHotel}
-            hotelSelected={hotelSelected}
-            setHotelSelected={setHotelSelected}
-          />
+          <HotelChoice />
         ) : (
           <StyledBox>
             <StyledText>Sua modalidade de ingresso não inclui hospedagem</StyledText>

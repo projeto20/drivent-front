@@ -2,23 +2,18 @@ import styled from 'styled-components';
 import useHotelsInfos from '../../../hooks/api/useHotelsInfo';
 import useBooking from '../../../hooks/api/useBooking';
 
-export default function HotelCard({ hotel, selectedhotel, setSelectedHotel, setHotelSelected  }) {
+export default function HotelCard({ hotel, setRooms, setHotelSelected }) {
   const { hotelInfo } = useHotelsInfos(hotel.id);
   const { booking, bookingError } = useBooking();
 
   function chooseHotel(num) {
-    setSelectedHotel(hotelInfo);
-    console.log(hotelInfo);
-    console.log(`fui clicado no ${num}`);
-    setHotelSelected(true);
+    setRooms(hotelInfo.Rooms);
+    setHotelSelected(hotelInfo);
   }
 
   return (
     <Card onClick={() => chooseHotel(hotel?.id)}>
-      <img
-        src={hotel?.image}
-        alt="foto-hotel"
-      />
+      <img src={hotel?.image} alt="foto-hotel" />
       <Title>{hotel?.name}</Title>
       <Info>
         <div>
