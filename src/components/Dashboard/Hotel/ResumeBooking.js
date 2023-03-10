@@ -1,19 +1,24 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import useHotels from '../../../hooks/api/useHotels';
+import { getHotels } from '../../../services/hotelApi';
 import { ReserveRoomButton } from './RoomChoice';
 
 export function ResumeBooking({ userBooking }) {
-  const { hotels } = useHotels();
-  console.log(hotels);
-
+  const [hotels, setHotels] = useState([]);
+  const token = JSON.parse(localStorage.getItem('userData')).token;
+  const hotel = hotels?.filter((e) => e.id === userBooking.Room.hotelId);
+  console.log(hotel);
+  useEffect(async() => {
+    const data = await getHotels(token);
+    setHotels(data);
+  }, []);
   return (
     <ResumeContainer>
       <p>Você já escolheu seu quarto</p>
       <Card >
-        <img src="" alt="foto-hotel" />
-        <Title>Drivent Resort</Title>
+        <img src={hotel[0]?.image} alt="foto-hotel" />
+        <Title>{hotel[0]?.name}</Title>
         <Info>
           <div>
             <h6>Quarto Reservado</h6>
@@ -31,7 +36,7 @@ export function ResumeBooking({ userBooking }) {
 }
 
 const ResumeContainer = styled.div`
-    p {
+    > p {
         color: #8e8e8e;
         font-size: 20px;
         margin-bottom: 14px;
