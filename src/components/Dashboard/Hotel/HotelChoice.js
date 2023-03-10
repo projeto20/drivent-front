@@ -6,14 +6,15 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { getBookings } from '../../../services/bookingApi';
 
-export default function HotelChoice({ rooms, setRooms, hotelSelected, setHotelSelected }) {
+export default function HotelChoice() {
   const { hotel } = useHotels();
   const [userBooking, setUserBooking] = useState(null);
   const token = JSON.parse(localStorage.getItem('userData')).token;
+  const [rooms, setRooms] = useState(null);
+  const [hotelSelected, setHotelSelected] = useState(false);
 
   useEffect(async() => {
     const booking = await getBookings(token);
-    console.log(booking);
   }, []);
 
   return (

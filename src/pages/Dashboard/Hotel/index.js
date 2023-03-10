@@ -8,20 +8,13 @@ export default function Hotel() {
   const { enrollment } = useEnrollment();
   const isRemote = 0;
   const includesHotel = 1;
-  const [rooms, setRooms] = useState(null);
-  const [hotelSelected, setHotelSelected] = useState(false);
 
   return (
     <>
       <StyledTypography variant="h4">Escolha de hotel e quarto</StyledTypography>
       {enrollment ? (
         !isRemote && includesHotel ? (
-          <HotelChoice
-            setRooms = {setRooms}
-            rooms = {rooms}
-            hotelSelected={hotelSelected}
-            setHotelSelected={setHotelSelected}
-          />
+          <HotelChoice />
         ) : (
           <StyledBox>
             <StyledText>Sua modalidade de ingresso não inclui hospedagem</StyledText>
