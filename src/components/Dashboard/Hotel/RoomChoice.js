@@ -1,45 +1,31 @@
-import { id } from 'date-fns/locale';
 import { useState } from 'react';
 import styled from 'styled-components';
 import person from '../../../../src/assets/images/person.svg';
 import selectedperson from '../../../../src/assets/images/selectedPerson.svg';
 import unavailable from '../../../../src/assets/images/unavailablePerson.svg';
+import { postBooking, postBookingv2 } from '../../../services/bookingApi';
 
-export default function RoomChoice() {
+export default function RoomChoice({ rooms }) {
+  const token = JSON.parse(localStorage.getItem('userData')).token;
   const [selected, setSelected] = useState(null);
+
+  console.log(rooms);
 
   function handleRoomClick(id) {
     setSelected(id);
   }
 
-  function handleButtonClick() {
+  async function handleButtonClick() {
     console.log('Voce reservou o quarto: ', selected);
+    const booking = await postBookingv2(selected, token);
+    console.log(booking);
   }
-
-  const rooms = [
-    { id: 100, capacity: 2 },
-    { id: 101, capacity: 1 },
-    { id: 102, capacity: 2 },
-    { id: 103, capacity: 2 },
-    { id: 104, capacity: 3 },
-    { id: 105, capacity: 3 },
-    { id: 106, capacity: 1 },
-    { id: 107, capacity: 2 },
-    { id: 108, capacity: 1 },
-    { id: 109, capacity: 2 },
-    { id: 110, capacity: 1 },
-    { id: 111, capacity: 1 },
-    { id: 112, capacity: 1 },
-    { id: 113, capacity: 2 },
-    { id: 114, capacity: 1 },
-    { id: 115, capacity: 1 },
-  ];
 
   return (
     <>
       <Title>Ótima pedida! Agora escolha seu quarto:</Title>
       <RoomsContainer>
-        {rooms.map((e, idx) => (
+        {rooms?.map((e, idx) => (
           <Room
             key={idx}
             id={e.id}
