@@ -3,22 +3,21 @@ import styled from 'styled-components';
 import person from '../../../../src/assets/images/person.svg';
 import selectedperson from '../../../../src/assets/images/selectedPerson.svg';
 import unavailable from '../../../../src/assets/images/unavailablePerson.svg';
+import Hotel from '../../../pages/Dashboard/Hotel';
 import { postBooking, postBookingv2 } from '../../../services/bookingApi';
 
-export default function RoomChoice({ rooms }) {
+export default function RoomChoice({ rooms, setUserBooking }) {
   const token = JSON.parse(localStorage.getItem('userData')).token;
   const [selected, setSelected] = useState(null);
-
-  console.log(rooms);
 
   function handleRoomClick(id) {
     setSelected(id);
   }
 
   async function handleButtonClick() {
-    console.log('Voce reservou o quarto: ', selected);
     const booking = await postBookingv2(selected, token);
-    console.log(booking);
+    if (booking.bookingId) {
+    }
   }
 
   return (
@@ -62,7 +61,7 @@ function Room({ id, capacity, isSelected, handleRoomClick }) {
   );
 }
 
-const ReserveRoomButton = styled.div`
+export const ReserveRoomButton = styled.div`
   margin-top: 46px;
   width: 182px;
   height: 37px;

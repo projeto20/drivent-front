@@ -8,7 +8,7 @@ export default function HotelCard({ hotel, setRooms, setHotelSelected }) {
 
   function chooseHotel(num) {
     setRooms(hotelInfo.Rooms);
-    setHotelSelected(true);
+    setHotelSelected(hotelInfo);
   }
 
   return (
