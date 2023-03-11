@@ -1,15 +1,31 @@
 import styled from 'styled-components';
 import useHotelsInfos from '../../../hooks/api/useHotelsInfo';
 import useBooking from '../../../hooks/api/useBooking';
+import { useEffect, useState } from 'react';
 
 export default function HotelCard({ hotel, setRooms, setHotelSelected }) {
   const { hotelInfo } = useHotelsInfos(hotel.id);
-  const { booking, bookingError } = useBooking();
+  const [ vacations, setVacation ] = useState(0);
 
   function chooseHotel(num) {
     setRooms(hotelInfo.Rooms);
     setHotelSelected(hotelInfo);
   }
+  
+  function CalcVacations(room) {
+    let vacation = 0;
+
+    for(let i=0; i < room?.length; i++) {
+      const total = room[i]?.capacity - room[i].Booking.length;
+      vacation += total;
+    }
+    
+    setVacation(vacation);
+  }
+
+  useEffect(() => {
+    CalcVacations(hotelInfo?.Rooms);
+  }, [hotelInfo]);
 
   return (
     <Card onClick={() => chooseHotel(hotel?.id)}>
@@ -22,7 +38,7 @@ export default function HotelCard({ hotel, setRooms, setHotelSelected }) {
         </div>
         <div>
           <h6>Vagas disponiveis</h6>
-          <p>{hotelInfo?.Rooms?.length}</p>
+          <p>{vacations}</p>
         </div>
       </Info>
     </Card>
