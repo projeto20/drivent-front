@@ -17,10 +17,16 @@ export default function RoomChoice({ setHotelSelected, rooms, setUserBooking, us
   }
 
   async function handleButtonClick( ) {
-    const booking = await postBookingv2(selected, token);
-    const bookingInfo = await getBookings(token);
-    setUserBooking(bookingInfo);
-    setHotelSelected(null);
+    try{
+      const booking = await postBookingv2(selected, token);
+      const bookingInfo = await getBookings(token);
+      setUserBooking(bookingInfo);
+      setHotelSelected(null);
+      toast('reserva realizada com sucesso!');
+    }
+    catch{
+      toast('Não foi possível fazer a reserva!');
+    }
   }
 
   async function roomUpdate() {
