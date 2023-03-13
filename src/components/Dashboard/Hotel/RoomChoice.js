@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import person from '../../../../src/assets/images/person.svg';
 import selectedperson from '../../../../src/assets/images/selectedPerson.svg';
 import unavailable from '../../../../src/assets/images/unavailablePerson.svg';
+import { getBookings } from '../../../services/bookingApi';
 import Hotel from '../../../pages/Dashboard/Hotel';
-import { postBooking, postBookingv2 } from '../../../services/bookingApi';
+import { postBooking, postBookingv2, putBooking } from '../../../services/bookingApi';
+import { toast } from 'react-toastify';
 
-export default function RoomChoice({ rooms, setUserBooking }) {
+export default function RoomChoice({ setHotelSelected, rooms, setUserBooking, userUpdateBooking, userBooking }) {
   const token = JSON.parse(localStorage.getItem('userData')).token;
   const [selected, setSelected] = useState(null);
 
@@ -14,9 +16,29 @@ export default function RoomChoice({ rooms, setUserBooking }) {
     setSelected(id);
   }
 
-  async function handleButtonClick() {
-    const booking = await postBookingv2(selected, token);
-    if (booking.bookingId) {
+  async function handleButtonClick( ) {
+    try{
+      const booking = await postBookingv2(selected, token);
+      const bookingInfo = await getBookings(token);
+      setUserBooking(bookingInfo);
+      setHotelSelected(null);
+      toast('reserva realizada com sucesso!');
+    }
+    catch{
+      toast('Não foi possível fazer a reserva!');
+    }
+  }
+
+  async function roomUpdate() {
+    try{
+      await putBooking(userUpdateBooking.id, selected, token);
+      const booking = await getBookings(token);
+      setUserBooking(booking);
+      setHotelSelected(null);
+      toast('mudança realizada com sucesso!');
+    }
+    catch{
+      toast('Não foi possível fazer a mudança!');
     }
   }
 
@@ -28,21 +50,22 @@ export default function RoomChoice({ rooms, setUserBooking }) {
           <Room
             key={idx}
             id={e.id}
+            name={e.name}
             handleRoomClick={handleRoomClick}
             isSelected={e.id === selected}
             capacity={e.capacity}
           />
         ))}
       </RoomsContainer>
-      {selected ? <ReserveRoomButton onClick={handleButtonClick}>RESERVAR QUARTO</ReserveRoomButton> : ''}
+      {selected ?<ReserveRoomButton onClick={userUpdateBooking? roomUpdate:handleButtonClick } > {userUpdateBooking ? 'MUDAR QUARTO' : 'RESERVAR QUARTO'}</ReserveRoomButton> : ''}
     </>
   );
 }
 
-function Room({ id, capacity, isSelected, handleRoomClick }) {
+function Room({ id, capacity, isSelected, handleRoomClick, name }) {
   return (
     <RoomContainer onClick={() => handleRoomClick(id)} isSelected={isSelected}>
-      <p>{id}</p>
+      <p>{name}</p>
       {capacity === 1 ? (
         <div>{isSelected ? <img src={selectedperson} /> : <img src={person} />}</div>
       ) : capacity === 2 ? (
