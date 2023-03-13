@@ -14,7 +14,6 @@ export default function RoomChoice({ setHotelSelected, rooms, setUserBooking, us
 
   function handleRoomClick(id) {
     setSelected(id);
-    console.log(rooms);
   }
 
   async function handleButtonClick( ) {
