@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { getHotels } from '../../../services/hotelApi';
 import { ReserveRoomButton } from './RoomChoice';
 
-export function ResumeBooking({ userBooking }) {
+export function ResumeBooking({ userBooking, setUserBooking, userUpdateBooking, setUserUpdateBooking }) {
   const [hotels, setHotels] = useState([]);
   const token = JSON.parse(localStorage.getItem('userData')).token;
   const hotel = hotels?.filter((e) => e.id === userBooking.Room.hotelId);
@@ -13,6 +13,14 @@ export function ResumeBooking({ userBooking }) {
     const data = await getHotels(token);
     setHotels(data);
   }, []);
+
+  async function ChangeRoomButton() {
+    console.log(userBooking);
+    setUserUpdateBooking(userBooking);
+    setUserBooking(null);
+    console.log('Informação passada!');
+  }
+
   return (
     <ResumeContainer>
       <p>Você já escolheu seu quarto</p>
@@ -30,7 +38,7 @@ export function ResumeBooking({ userBooking }) {
           </div>
         </Info>
       </Card>
-      <ReserveRoomButton>Trocar quarto</ReserveRoomButton>
+      <ReserveRoomButton onClick={ChangeRoomButton}>Trocar quarto</ReserveRoomButton>
     </ResumeContainer>
   );
 }

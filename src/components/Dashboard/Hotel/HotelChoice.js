@@ -10,6 +10,7 @@ import { ResumeBooking } from './ResumeBooking';
 export default function HotelChoice() {
   const { hotel } = useHotels();
   const [userBooking, setUserBooking] = useState(null);
+  const [userUpdateBooking, setUserUpdateBooking] = useState(null);
   const token = JSON.parse(localStorage.getItem('userData')).token;
   const [rooms, setRooms] = useState(null);
   const [hotelSelected, setHotelSelected] = useState(null);
@@ -22,7 +23,7 @@ export default function HotelChoice() {
   return (
     <>
       <StyledContainer>
-        {userBooking && <ResumeBooking userBooking={userBooking}/>}
+        {userBooking && <ResumeBooking userBooking={userBooking} setUserBooking={setUserBooking} userUpdateBooking={userUpdateBooking} setUserUpdateBooking={setUserUpdateBooking} />}
         {!userBooking && hotel?.map((hotels) => {
           return (
             <HotelCard
@@ -36,7 +37,7 @@ export default function HotelChoice() {
           );
         })}
       </StyledContainer>
-      {hotelSelected && <RoomChoice setRooms={setRooms} rooms={rooms} />}
+      {hotelSelected && <RoomChoice setHotelSelected={setHotelSelected} setRooms={setRooms} rooms={rooms} userUpdateBooking={userUpdateBooking} setUserUpdateBooking={setUserUpdateBooking} setUserBooking={setUserBooking} />}
     </>
   );
 }
