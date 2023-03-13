@@ -23,7 +23,7 @@ export default function RoomChoice({ setHotelSelected, rooms, setUserBooking, us
       const bookingInfo = await getBookings(token);
       setUserBooking(bookingInfo);
       setHotelSelected(null);
-      toast('reserva realizada com sucesso!');
+      toast('Reserva realizada com sucesso!');
     }
     catch{
       toast('Não foi possível fazer a reserva!');
@@ -36,7 +36,7 @@ export default function RoomChoice({ setHotelSelected, rooms, setUserBooking, us
       const booking = await getBookings(token);
       setUserBooking(booking);
       setHotelSelected(null);
-      toast('mudança realizada com sucesso!');
+      toast('Mudança realizada com sucesso!');
     }
     catch{
       toast('Não foi possível fazer a mudança!');
