@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { getHotels } from '../../../services/hotelApi';
+import { getHotelInfos, getHotels } from '../../../services/hotelApi';
 import { ReserveRoomButton } from './RoomChoice';
 
 export function ResumeBooking({ userBooking, setUserBooking, userUpdateBooking, setUserUpdateBooking }) {
   const [hotels, setHotels] = useState([]);
   const token = JSON.parse(localStorage.getItem('userData')).token;
   const hotel = hotels?.filter((e) => e.id === userBooking.Room.hotelId);
-  console.log(hotel);
   useEffect(async() => {
     const data = await getHotels(token);
+    
+    const hotelInfo = await getHotelInfos(userBooking.Room.hotelId, token);
+    console.log('hotelInfo', hotelInfo);
     setHotels(data);
   }, []);
 
