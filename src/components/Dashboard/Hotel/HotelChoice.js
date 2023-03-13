@@ -14,7 +14,6 @@ export default function HotelChoice() {
   const token = JSON.parse(localStorage.getItem('userData')).token;
   const [rooms, setRooms] = useState(null);
   const [hotelSelected, setHotelSelected] = useState(null);
-  console.log(hotelSelected);
   useEffect(async() => {
     const booking = await getBookings(token);
     setUserBooking(booking);

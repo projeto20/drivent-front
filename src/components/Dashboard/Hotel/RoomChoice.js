@@ -22,7 +22,7 @@ export default function RoomChoice({ setHotelSelected, rooms, setUserBooking, us
       const bookingInfo = await getBookings(token);
       setUserBooking(bookingInfo);
       setHotelSelected(null);
-      toast('reserva realizada com sucesso!');
+      toast('Reserva realizada com sucesso!');
     }
     catch{
       toast('Não foi possível fazer a reserva!');
@@ -35,7 +35,7 @@ export default function RoomChoice({ setHotelSelected, rooms, setUserBooking, us
       const booking = await getBookings(token);
       setUserBooking(booking);
       setHotelSelected(null);
-      toast('mudança realizada com sucesso!');
+      toast('Mudança realizada com sucesso!');
     }
     catch{
       toast('Não foi possível fazer a mudança!');
@@ -48,12 +48,14 @@ export default function RoomChoice({ setHotelSelected, rooms, setUserBooking, us
       <RoomsContainer>
         {rooms?.map((e, idx) => (
           <Room
+            isFull={e.capacity <= e.Booking.length}
             key={idx}
             id={e.id}
             name={e.name}
             handleRoomClick={handleRoomClick}
             isSelected={e.id === selected}
             capacity={e.capacity}
+            booking={e.Booking}
           />
         ))}
       </RoomsContainer>
@@ -62,22 +64,22 @@ export default function RoomChoice({ setHotelSelected, rooms, setUserBooking, us
   );
 }
 
-function Room({ id, capacity, isSelected, handleRoomClick, name }) {
+function Room({ isFull, booking, id, capacity, isSelected, handleRoomClick, name }) {
   return (
-    <RoomContainer onClick={() => handleRoomClick(id)} isSelected={isSelected}>
+    <RoomContainer onClick={!isFull ? () => handleRoomClick(id) : null} isSelected={isSelected} isFull={isFull}>
       <p>{name}</p>
       {capacity === 1 ? (
-        <div>{isSelected ? <img src={selectedperson} /> : <img src={person} />}</div>
+        <div>{isSelected ? <img src={selectedperson} /> : (booking.length === 1) ? <img src={unavailable} /> : <img src={person} />}</div>
       ) : capacity === 2 ? (
         <div>
-          <img src={person} />
-          {isSelected ? <img src={selectedperson} /> : <img src={person} />}
+          {booking.length >= 1 ?<img src={unavailable} /> : <img src={person} /> }
+          {isSelected ? <img src={selectedperson} /> : (booking.length === 2) ? <img src={unavailable} /> : <img src={person} />}
         </div>
       ) : (
         <div>
-          <img src={person} />
-          <img src={person} />
-          {isSelected ? <img src={selectedperson} /> : <img src={person} />}
+          {booking.length >= 2 ? <img src={unavailable} /> : <img src={person} /> }
+          {booking.length >= 1 ?<img src={unavailable} /> : <img src={person} /> }
+          {isSelected ? <img src={selectedperson} /> : (booking.length === 3) ? <img src={unavailable} /> : <img src={person} />}
         </div>
       )}
     </RoomContainer>
@@ -121,7 +123,7 @@ const RoomContainer = styled.div`
   border: 1px solid #cecece;
   border-radius: 10px;
   margin-top: 8px;
-  background-color: ${(props) => (props.isSelected ? '#FFEED2' : '')};
+  background-color: ${(props) => (props.isFull ? '#CECECE' : props.isSelected ? '#FFEED2' : '')};
   p {
     margin-left: 16px;
   }
