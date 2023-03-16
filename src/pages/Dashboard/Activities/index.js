@@ -2,6 +2,7 @@ import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 import DayChoice from '../../../components/Dashboard/Activities/DayChoice';
 import useTicket from '../../../hooks/api/useTicket';
+import ActivitiesChoice from '../../../components/Dashboard/Activities/ActiviesChoice.js';
 
 
 export default function Activities() {
@@ -15,7 +16,7 @@ export default function Activities() {
         <StyledBox>
           <StyledText>Você precisa escolher um ingresso antes</StyledText>
         </StyledBox>
-      ) : null}
+      ) : <ActivitiesChoice/>}
       {ticket?.status === 'RESERVED' ? (
         <StyledBox>
           <StyledText>Você precisa ter confirmado pagamento antes de fazer a escolha de atividades</StyledText>
