@@ -13,8 +13,8 @@ export default function ActivitiesChoice() {
     <AuditorioContainer><h1>Auditorio Principal</h1>
       <AcitivitiesBox>
         <Activitie><TimeBox>
-          <h1>Minecraft: montando o PC ideal</h1>
-          <h2>09:00 - 10:00</h2></TimeBox>
+          <h2>Minecraft: montando o PC ideal</h2>
+          <h3>09:00 - 10:00</h3></TimeBox>
         <Line></Line>
         <VacancyBox>
           <CgEnter
@@ -24,8 +24,8 @@ export default function ActivitiesChoice() {
 
         </Activitie>
         <Activitie><TimeBox>
-          <h1>Minecraft: montando o PC ideal</h1>
-          <h2>09:00 - 10:00</h2></TimeBox>
+          <h2>Minecraft: montando o PC ideal</h2>
+          <h3>09:00 - 10:00</h3></TimeBox>
         <Line></Line>
         <VacancyBox>
           <AiOutlineCloseCircle
@@ -39,8 +39,8 @@ export default function ActivitiesChoice() {
     <AuditorioContainer><h1>Auditorio Lateral</h1>
       <AcitivitiesBox>
         <BigActivitie><BigTimeBox>
-          <h1>Palestra x</h1>
-          <h2>09:00 - 11:00</h2></BigTimeBox>
+          <h2>Palestra x</h2>
+          <h3>09:00 - 11:00</h3></BigTimeBox>
         <BigLine></BigLine>
         <VacancyBox>
           <CgEnter
@@ -53,8 +53,8 @@ export default function ActivitiesChoice() {
     <AuditorioContainer><h1>Sala de Workshop</h1>
       <AcitivitiesBox>
         <Activitie><TimeBox>
-          <h1>Minecraft: montando o PC ideal</h1>
-          <h2>09:00 - 10:00</h2></TimeBox>
+          <h2>Minecraft: montando o PC ideal</h2>
+          <h3>09:00 - 10:00</h3></TimeBox>
         <Line></Line>
         <VacancyBox>
           <CgEnter
@@ -64,8 +64,8 @@ export default function ActivitiesChoice() {
 
         </Activitie>
         <Activitie><TimeBox>
-          <h1>Minecraft: montando o PC ideal</h1>
-          <h2>09:00 - 10:00</h2></TimeBox>
+          <h2>Minecraft: montando o PC ideal</h2>
+          <h3>09:00 - 10:00</h3></TimeBox>
         <Line></Line>
         <VacancyBox>
           <AiOutlineCloseCircle
@@ -89,11 +89,28 @@ border: 1px solid #CFCFCF;
 transform: rotate(-90deg);
 `;
 const BigTimeBox = styled.div`
-
+h2{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 12px;
+line-height: 14px;
+color: #343434;
+}
+h3{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 14px;
+color: #343434;
+}
 `;
 const VacancyBox = styled.div`
 display: flex;
 flex-direction: column;
+align-items: center;
+justify-content: center;
 h2{
     font-family: 'Roboto';
 font-style: normal;
@@ -101,11 +118,29 @@ font-weight: 400;
 font-size: 9px;
 line-height: 11px;
 color: #078632;
+white-space: nowrap;
 }
 `;
 const TimeBox = styled.div`
 display: flex;
 flex-direction: column;
+h2{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 12px;
+line-height: 14px;
+color: #343434;
+}
+h3{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 14px;
+color: #343434;
+margin-top: 6px;
+}
 `;
 const Line = styled.div`
 display: flex;
@@ -115,6 +150,9 @@ border: 1px solid #CFCFCF;
 transform: rotate(-90deg);
 `;
 const Activitie = styled.div`
+box-sizing: border-box;
+padding-left: 10px;
+padding-right: 10px;
 display: flex;
 width: 265px;
 height: 79px;
@@ -122,11 +160,14 @@ background: #F1F1F1;
 border-radius: 5px;
 margin-top: 10px;
 align-items: center;
+justify-content: center;
 `;
 
 const BigActivitie = styled.div`
+box-sizing: border-box;
 display: flex;
 align-items: center;
+padding: 10px;
 width: 265px;
 height: 168px;
 background: #F1F1F1;
@@ -139,12 +180,24 @@ const DaysContainer = styled.div`
 display: flex;
 `;
 const DayBox = styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
 width: 131px;
 height: 37px;
 background: #E0E0E0;
 box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.25);
 border-radius: 4px;
 margin-right: 17px;
+h2{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+text-align: center;
+color: #000000;
+}
 `;
 const EventRoomsContainer = styled.div`
 margin-top: 60px;

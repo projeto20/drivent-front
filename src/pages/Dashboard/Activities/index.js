@@ -4,7 +4,7 @@ import ActivitiesChoice from '../../../components/Dashboard/Activities/ActiviesC
 
 export default function Activities() {
   return(
-    <><StyledTypography variant="h4">Escolha de hotel e quarto</StyledTypography>
+    <><StyledTypography variant="h4">Escolha de atividades</StyledTypography>
       <ActivitiesChoice/>
   
     </>);
