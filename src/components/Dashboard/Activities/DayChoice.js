@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 
 export default function DayChoice({ setChoosenDay }) {
   const token = JSON.parse(localStorage.getItem('userData')).token;
-  const week = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+  const week = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
   const [dateData, setDateData] = useState(null);
   const [isClicked, setIsClicked] = useState(null);
 
