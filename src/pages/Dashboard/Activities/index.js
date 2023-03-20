@@ -3,20 +3,23 @@ import styled from 'styled-components';
 import DayChoice from '../../../components/Dashboard/Activities/DayChoice';
 import useTicket from '../../../hooks/api/useTicket';
 import ActivitiesChoice from '../../../components/Dashboard/Activities/ActiviesChoice.js';
-
+import { useState } from 'react';
 
 export default function Activities() {
   const { ticket } = useTicket();
+  const [choosenDay, setChoosenDay] = useState(null);
 
   return (
     <>
       <StyledTypography variant="h4">Escolha de Atividades</StyledTypography>
-      {ticket?.status === 'PAID' && !ticket?.TicketType.isRemote ? <DayChoice /> : null}
+      {ticket?.status === 'PAID' && !ticket?.TicketType.isRemote ? <DayChoice setChoosenDay={setChoosenDay} /> : null}
       {!ticket ? (
         <StyledBox>
           <StyledText>Você precisa escolher um ingresso antes</StyledText>
         </StyledBox>
-      ) : <ActivitiesChoice/>}
+      ) : (
+        <ActivitiesChoice choosenDay={choosenDay} />
+      )}
       {ticket?.status === 'RESERVED' ? (
         <StyledBox>
           <StyledText>Você precisa ter confirmado pagamento antes de fazer a escolha de atividades</StyledText>
